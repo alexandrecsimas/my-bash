@@ -1,0 +1,29 @@
+
+source $HOME/.bash_keys/home/xandy
+source $HOME/.bash_aliases
+
+# Added by Toolbox App
+export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
+
+alias pmac="sshuttle -r pmac $faixa10"
+alias desktop="Área de Trabalho"
+
+# RDP
+function r()
+{
+	echo "Qual servidor? "
+	for ((cont=1;cont<${#nome_servidor[@]};cont++)); do
+		echo ""$cont" - "$nome_servidor[$cont] " - "$ip_servidor[$cont]
+	done
+	echo -n "Opção escolhida: "
+	read servidor
+	echo "Servidor escolhido foi: "${nome_servidor[$servidor]}
+	echo "Conectando-se ao servidor em alguns segundos..."
+	sleep 2
+	# apt install rdesktop
+	rdesktop -u $adUser -d $adDom -p "$adPass" -vvv ${ip_servidor[$servidor]}
+}
+
+# apt install speedtest
+
+alias startPg='~/pgadmin4/pgadmin4env/bin/python ~/pgadmin4/pgadmin4env/lib/python3.10/site-packages/pgadmin4/pgAdmin4.py'
