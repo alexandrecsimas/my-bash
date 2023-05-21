@@ -1,15 +1,46 @@
 
-source $HOME/.bash_keys/home/xandy
+# 
+# ███╗   ███╗██╗   ██╗    ██████╗  █████╗ ███████╗██╗  ██╗
+# ████╗ ████║╚██╗ ██╔╝    ██╔══██╗██╔══██╗██╔════╝██║  ██║
+# ██╔████╔██║ ╚████╔╝     ██████╔╝███████║███████╗███████║
+# ██║╚██╔╝██║  ╚██╔╝      ██╔══██╗██╔══██║╚════██║██╔══██║
+# ██║ ╚═╝ ██║   ██║       ██████╔╝██║  ██║███████║██║  ██║
+# ╚═╝     ╚═╝   ╚═╝       ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+# 
+# powererd by https://github.com/alexandrecsimas
+#!/bin/bash
+
+source $HOME/.bash_keys
 source $HOME/.bash_aliases
 
 # Added by Toolbox App
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 
-alias pmac="sshuttle -r pmac $faixa10"
-alias desktop="Área de Trabalho"
+alias pmac="sshuttle -r pmac 192.168.10.0/24"
 
-# RDP
-function r()
+# check if pkg is installed and install it
+function apto()
+{
+	echo $1;
+	pacote=$(dpkg --get-selections | grep "$1" )
+	if [ -n "$pacote" ] ;
+	then echo
+			echo "Pacote $1 instalado"
+	 else echo
+ 			echo "Pacote $1 Necessario-> Nao instalado"
+     	echo "Instalando Automaticamente Pacote Dialog..."
+     	sudo apt install $1 -y
+	fi
+}
+
+function remover()
+{
+		echo "Removendo $1..."
+		apt remove $1 && apt autoremove && apt purge
+		echo "$1 removido!"
+}
+
+function d()
 {
 	echo "Qual servidor? "
 	for ((cont=1;cont<${#nome_servidor[@]};cont++)); do
@@ -21,9 +52,24 @@ function r()
 	echo "Conectando-se ao servidor em alguns segundos..."
 	sleep 2
 	# apt install rdesktop
+	apto rdesktop
 	rdesktop -u $adUser -d $adDom -p "$adPass" -vvv ${ip_servidor[$servidor]}
 }
 
-# apt install speedtest
+: "You have 2 options:
+			1- apt install speedtest # only results by CLI
+			2- download .tgz at https://www.speedtest.net/apps/cli
+				extract an run it. This way shows the Result URL too"
 
-alias startPg='~/pgadmin4/pgadmin4env/bin/python ~/pgadmin4/pgadmin4env/lib/python3.10/site-packages/pgadmin4/pgAdmin4.py'
+# Ookla Speedtest with Resul URL by CLI
+function i() #internet
+{
+	dir=$PWD
+	cd /app/speedtest && ./speedtest
+	cd $dir
+}
+
+alias startPg='~/pgadmin4/pgadmin4env/bin/python ~/pgadmin4/pgadmin4env/lib/
+	python3.10/site-packages/pgadmin4/pgAdmin4.py'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
