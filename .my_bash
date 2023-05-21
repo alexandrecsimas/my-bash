@@ -16,7 +16,7 @@ source $HOME/.bash_aliases
 # Added by Toolbox App
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 
-alias pmac="sshuttle -r pmac 192.168.10.0/24"
+alias pmac="sshuttle -r pmac $faixa10"
 
 # check if pkg is installed and install it
 function apto()
