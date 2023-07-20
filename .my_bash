@@ -35,9 +35,10 @@ function apto()
 
 function remover()
 {
-		echo "Removendo $1..."
-		apt remove $1 && apt autoremove && apt purge
-		echo "$1 removido!"
+	app = "'^+'"+$1+".*$'"
+	echo "Removendo tudo de $1..."
+	apt remove $app && apt autoremove && apt purge
+	echo "$1 removido!"
 }
 
 function d()
