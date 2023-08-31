@@ -8,7 +8,6 @@
 # ╚═╝     ╚═╝   ╚═╝       ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 # 
 # powererd by https://github.com/alexandrecsimas
-#!/bin/bash
 
 source $HOME/.bash_keys
 source $HOME/.bash_aliases
